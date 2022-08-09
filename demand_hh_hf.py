@@ -67,7 +67,9 @@ factors_tier_5.index = selected_chps.facility_name
 number_hh = selected_chps.Households
 
 for chp in demands_chps.columns:
-    demands_chps[chp] = elec_dem_hf_chps_year.elec_dem_hf + selected_chps.loc[(selected_chps['facility_name'] == chp), "Households"] * (
+    demands_chps[chp] = elec_dem_hf_chps_year.elec_dem_hf + \
+                        selected_chps.loc[(selected_chps['facility_name'] == chp),
+                                          "Households"].values[0] * (
         factors_tier_3[chp]*elec_dem_hh_tier3.elec_dem_hh3 
         + factors_tier_4[chp]*elec_dem_hh_tier4.elec_dem_hh4 
         + factors_tier_5[chp]*elec_dem_hh_tier5.elec_dem_hh5)
